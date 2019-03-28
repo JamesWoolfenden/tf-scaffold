@@ -10,10 +10,8 @@
 .build-harness
 build-harness
 *.ini
-# .tfvars files
 *~HEAD
 *backup
-*.tfvars
 *.ini
 tmp
 lambda
