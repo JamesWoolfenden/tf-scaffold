@@ -6,8 +6,17 @@ To clone scaffold repository but no with no .git folder.
 ## Powershell
 
 ```cli
-git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git scaffold| rm !$/.git -recurse -force
+git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git scaffold
+rm scaffold\.git -recurse -force
 ```
+
+Edit your profile and add:
+
+function scaffold {
+param([string]$name)
+git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name" 
+rm "$name\.git" -recurse -force
+}
 
 ## *Nix
 
