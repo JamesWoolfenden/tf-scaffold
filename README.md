@@ -1,7 +1,7 @@
 # tf-scaffold
 This repository exists to help with new terraform projects, and with automation and training. It is designed to create the structure- scaffold that is alway needed for a new project.
 
-To clone scaffold repository but no with no .git folder.
+To clone scaffold repository but with no .git folder.
 
 ## Powershell
 
