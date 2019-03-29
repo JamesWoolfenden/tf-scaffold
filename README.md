@@ -13,11 +13,17 @@ rm scaffold\.git -recurse -force
 Edit your profile and add:
 ```powershell
 function scaffold {
-param([string]$name)
-git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name" 
-rm "$name\.git" -recurse -force
+   param([string]$name)
+   git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name" 
+   rm "$name\.git" -recurse -force
 }
 ```
+
+Then you can use 
+```powershell
+scaffold -name hello-world
+```
+To make a new project anytime you like.
 
 ## *Nix
 
