@@ -64,8 +64,8 @@ This is just to make like easier for you. Problematic if you are cross platform 
 ### outputs.tf
 A standard place to return values, either to the screen or to pass back from a module.
 
-### provider.tf
-You are always going to be using these. 
+### provider.aws.tf
+You are always going to be using these, I have added the most basic provider for AWS. 
 
 ### README.md
 Where all the information goes.
