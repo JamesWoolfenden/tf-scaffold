@@ -54,7 +54,8 @@ else
    name=$1
 fi
 echo "git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name"
-git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name| rm !$name/.git -rf
+git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name
+rm $name/.git -rf
 }
 ```
 
