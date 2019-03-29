@@ -43,6 +43,24 @@ To make a new project anytime you like.
 git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git scaffold| rm !$/.git -rf 
 ```
 
+Or you add this to your ~/.bashrc
+
+```bash
+function scaffold() {
+if [ -z "$1" ]
+then
+   name="scaffold"
+else
+   name=$1
+fi
+echo "git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name"
+git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name| rm !$name/.git -rf
+}
+```
+
+```cli
+ $ scaffold hello-world
+```
 ## So what's in it?
 
 ### .gitignore
