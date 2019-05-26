@@ -94,3 +94,6 @@ This is the standard file for setting your variables in.
 
 ### variables.tf
 Contains a map variable **common_tags** which should be extended and used on every taggable object. 
+
+### .dependsabot/config.yml
+Sets the repository to be automatically dependency scanned in github.
