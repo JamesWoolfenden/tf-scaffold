@@ -1,2 +1,2 @@
-common_tags={
-             "createdby"="Terraform"}
+common_tags = {
+"createdby" = "Terraform" }

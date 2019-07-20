@@ -37,11 +37,12 @@ function scaffold {
 }
 ```
 
+Then you can use:
 
-Then you can use
 ```powershell
 scaffold -name hello-world
 ```
+
 To make a new project anytime you like.
 
 ## *Nix
@@ -66,11 +67,22 @@ rm $name/.git -rf
 }
 ```
 
+## Usage
+
+Once it's in your profile, pretty straigh forward:
+
 ```cli
- $ scaffold hello-world
+ $ scaffold terraform-aws-generic
+git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git terraform-aws-generic
+Cloning into 'terraform-aws-generic'...
+remote: Enumerating objects: 14, done.
+remote: Counting objects: 100% (14/14), done.
+remote: Compressing objects: 100% (9/9), done.
+remote: Total 14 (delta 0), reused 10 (delta 0), pack-reused 0
+Receiving objects: 100% (14/14), done.
 ```
 
-## So what's in it?
+## So what's in it
 
 ### .gitignore
 
@@ -80,6 +92,7 @@ Has good defaults for working with Terraform
 
 Has a standard set of pre-commit hooks for working with Terraform and AWS. You'll need to install the pre-commit framework <https://pre-commit.com/#install>.
 And after youve added all these file to your new repo, in the root of your new repository:
+
 ```cli
 pre-commit install
 ```
@@ -110,7 +123,22 @@ This is the standard file for setting your variables in.
 
 ### variables.tf
 
-Contains a map variable **common_tags** which should be extended and used on every taggable object.
+Contains a map variable **common_tags** which should be extended and used on
+ every taggable object.
 
 ### .dependsabot/config.yml
+
 Sets the repository to be automatically dependency scanned in github.
+
+## terraform-docs
+
+If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| common\_tags | This is to help you add tags to your cloud objects | map | n/a | yes |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
