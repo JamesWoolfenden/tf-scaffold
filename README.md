@@ -117,9 +117,9 @@ You are always going to be using these, I have added the most basic provider for
 
 Where all the information goes.
 
-### terraform.tfvars
+### main.auto.tfvars
 
-This is the standard file for setting your variables in.
+This is the standard file for setting your variables in. The auto keyword ensures its picked up and used by Terraform.
 
 ### variables.tf
 
