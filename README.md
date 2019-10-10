@@ -16,8 +16,11 @@ Edit your profile and add:
 
 ```powershell
 function scaffold {
-   param([string]$name)
-   git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+   param(
+         [parameter(mandatory=$true)]
+         [string]$name,
+         [string]$branch="master")
+   git clone --depth=1 --branch=$branch git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
    rm "$name\.git" -recurse -force
 }
 ```
@@ -28,8 +31,9 @@ or
 function scaffold {
    param(
       [parameter(mandatory=$true)]
-      [string]$name)
-   git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+      [string]$name,
+      [string]$branch="master")
+   git clone --depth=1 --branch=$branch git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
    rm "$name\.git" -recurse -force
    git init|git add -A
    pre-commit install
@@ -61,8 +65,17 @@ then
 else
    name=$1
 fi
-echo "git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name"
-git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name
+
+if [ -z "$2" ]
+then
+   branch="master"
+else
+   branch=$2
+fi
+
+
+echo "git clone --depth=1 --branch $branch git@github.com:JamesWoolfenden/tf-scaffold.git $name"
+git clone --depth=1 --branch $branch git@github.com:JamesWoolfenden/tf-scaffold.git $name
 rm $name/.git -rf
 }
 ```
