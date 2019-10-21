@@ -31,10 +31,19 @@ or
 function scaffold {
    param(
       [parameter(mandatory=$true)]
-      [string]$name,
-      [string]$branch="master")
-   git clone --depth=1 --branch=$branch git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+      [string]$name)
+
+   if (!(test-path .\$name))
+   {   
+      git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+   }
+   else{
+      write-warning "Path $name already exists"
+      return
+   }
+
    rm "$name\.git" -recurse -force
+   cd $name
    git init|git add -A
    pre-commit install
    git commit -m "Initial Draft"
