@@ -16,8 +16,11 @@ Edit your profile and add:
 
 ```powershell
 function scaffold {
-   param([string]$name)
-   git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+   param(
+         [parameter(mandatory=$true)]
+         [string]$name,
+         [string]$branch="master")
+   git clone --depth=1 --branch=$branch git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
    rm "$name\.git" -recurse -force
 }
 ```
@@ -29,8 +32,18 @@ function scaffold {
    param(
       [parameter(mandatory=$true)]
       [string]$name)
-   git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+
+   if (!(test-path .\$name))
+   {
+      git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+   }
+   else{
+      write-warning "Path $name already exists"
+      return
+   }
+
    rm "$name\.git" -recurse -force
+   cd $name
    git init|git add -A
    pre-commit install
    git commit -m "Initial Draft"
@@ -45,7 +58,7 @@ scaffold -name hello-world
 
 To make a new project anytime you like.
 
-## *Nix
+## \*Nix
 
 ```cli
 git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git scaffold| rm !$/.git -rf
@@ -61,8 +74,17 @@ then
 else
    name=$1
 fi
-echo "git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name"
-git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git $name
+
+if [ -z "$2" ]
+then
+   branch="master"
+else
+   branch=$2
+fi
+
+
+echo "git clone --depth=1 --branch $branch git@github.com:JamesWoolfenden/tf-scaffold.git $name"
+git clone --depth=1 --branch $branch git@github.com:JamesWoolfenden/tf-scaffold.git $name
 rm $name/.git -rf
 }
 ```
@@ -119,12 +141,12 @@ Where all the information goes.
 
 ### main.auto.tfvars
 
-This is the standard file for setting your variables in.
+This is the standard file for setting your variables in. The auto keyword ensures its picked up and used by Terraform.
 
 ### variables.tf
 
 Contains a map variable **common_tags** which should be extended and used on
- every taggable object.
+every taggable object.
 
 ### .dependsabot/config.yml
 
@@ -135,10 +157,11 @@ Sets the repository to be automatically dependency scanned in github.
 If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| common\_tags | This is to help you add tags to your cloud objects | map | n/a | yes |
+| Name        | Description                                        | Type | Default | Required |
+| ----------- | -------------------------------------------------- | :--: | :-----: | :------: |
+| common_tags | This is to help you add tags to your cloud objects | map  |   n/a   |   yes    |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
