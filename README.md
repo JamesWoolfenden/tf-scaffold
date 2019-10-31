@@ -30,12 +30,13 @@ or
 ```powershell
 function scaffold {
    param(
-      [parameter(mandatory=$true)]
-      [string]$name)
+         [parameter(mandatory=$true)]
+         [string]$name,
+         [string]$branch="master")
 
    if (!(test-path .\$name))
    {
-      git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+       git clone --depth=1 --branch=$branch git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
    }
    else{
       write-warning "Path $name already exists"
