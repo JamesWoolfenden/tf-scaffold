@@ -34,7 +34,7 @@ function scaffold {
       [string]$name)
 
    if (!(test-path .\$name))
-   {   
+   {
       git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
    }
    else{
@@ -58,7 +58,7 @@ scaffold -name hello-world
 
 To make a new project anytime you like.
 
-## *Nix
+## \*Nix
 
 ```cli
 git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git scaffold| rm !$/.git -rf
@@ -146,7 +146,7 @@ This is the standard file for setting your variables in. The auto keyword ensure
 ### variables.tf
 
 Contains a map variable **common_tags** which should be extended and used on
- every taggable object.
+every taggable object.
 
 ### .dependsabot/config.yml
 
@@ -157,10 +157,11 @@ Sets the repository to be automatically dependency scanned in github.
 If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
 ## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| common\_tags | This is to help you add tags to your cloud objects | map | n/a | yes |
+| Name        | Description                                        | Type | Default | Required |
+| ----------- | -------------------------------------------------- | :--: | :-----: | :------: |
+| common_tags | This is to help you add tags to your cloud objects | map  |   n/a   |   yes    |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
