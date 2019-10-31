@@ -45,6 +45,7 @@ function scaffold {
 
    rm "$name\.git" -recurse -force
    cd $name
+   echo "# %name" >README.md 
    git init|git add -A
    pre-commit install
    git commit -m "Initial Draft"
