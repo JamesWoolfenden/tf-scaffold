@@ -158,10 +158,4 @@ If you leave the section below in your **README.md** then the pre-commit will au
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
-## Inputs
-
-| Name        | Description                                        | Type | Default | Required |
-| ----------- | -------------------------------------------------- | :--: | :-----: | :------: |
-| common_tags | This is to help you add tags to your cloud objects | map  |   n/a   |   yes    |
-
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

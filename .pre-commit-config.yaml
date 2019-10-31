@@ -26,7 +26,6 @@ repos:
       - commit
       - push
     hooks:
-      - id: detect-aws-credentials
       - id: detect-private-key
   - repo: git://github.com/detailyang/pre-commit-shell
     rev: 1.0.5
@@ -52,5 +51,4 @@ repos:
   - repo: git://github.com/antonbabenko/pre-commit-terraform
     rev: v1.19.0
     hooks:
-      - id: terraform_validate
       - id: terraform_docs
