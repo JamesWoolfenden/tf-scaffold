@@ -32,7 +32,8 @@ function scaffold {
    param(
          [parameter(mandatory=$true)]
          [string]$name,
-         [string]$branch="master")
+         [string]$branch="master",
+         [switch]$repo=$false)
 
    if (!(test-path .\$name))
    {
@@ -45,10 +46,13 @@ function scaffold {
 
    rm "$name\.git" -recurse -force
    cd $name
-   echo "# $name" >README.md 
-   git init|git add -A
-   pre-commit install
-   git commit -m "Initial Draft"
+   echo "# %name" >README.md
+   if ($repo)
+   {
+      git init|git add -A
+      pre-commit install
+      git commit -m "Initial Draft"
+   }
 }
 ```
 
@@ -56,6 +60,12 @@ Then you can use:
 
 ```powershell
 scaffold -name hello-world
+```
+
+or to start a new git repo as well:
+
+```powershell
+scaffold -name hello-world -repo
 ```
 
 To make a new project anytime you like.
