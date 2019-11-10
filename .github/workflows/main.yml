@@ -4,14 +4,8 @@ on:
     branches:
       - master
 jobs:
-  checkout:
-    name: checkout
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@master
   validate:
-    name: Validate
+    name: validate
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
@@ -28,7 +22,6 @@ jobs:
         with:
           entrypoint: terraform
           args: validate
-    needs: checkout
   build:
     name: versioning
     runs-on: ubuntu-latest
