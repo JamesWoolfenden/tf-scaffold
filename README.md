@@ -1,8 +1,8 @@
 # tf-scaffold
 
 This repository exists to help with new terraform projects, and with automation and training.
-The repository is designed to create the structure- scaffold that is alway needed for a new project.
-
+The repository is designed to create the structure- scaffold that is alway needed for a new Terraform project.
+Included are the basic Github Actions.
 To clone scaffold repository but with no .git folder.
 
 ## Powershell
@@ -169,11 +169,10 @@ Sets the repository to be automatically dependency scanned in github.
 If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Inputs
 
-| Name        | Description                                        | Type | Default | Required |
-| ----------- | -------------------------------------------------- | :--: | :-----: | :------: |
-| common_tags | This is to help you add tags to your cloud objects | map  |   n/a   |   yes    |
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| common\_tags | This is to help you add tags to your cloud objects | map | n/a | yes |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
