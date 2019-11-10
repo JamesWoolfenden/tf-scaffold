@@ -33,4 +33,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO_OWNER: jameswoolfenden
           DEFAULT_BUMP: patch
-          WITH_V: "false"
+          WITH_V: "true"
