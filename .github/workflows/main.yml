@@ -1,0 +1,35 @@
+name: Bump version
+on:
+  push:
+    branches:
+      - master
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Run a Terraform init
+        uses: docker://hashicorp/terraform:0.12.11
+        with:
+          entrypoint: terraform
+          args: init
+
+      - name: Run a Terraform validate
+        uses: docker://hashicorp/terraform:0.12.11
+        with:
+          entrypoint: terraform
+          args: validate
+  build:
+    name: versioning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          WITH_V: true

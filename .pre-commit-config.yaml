@@ -45,11 +45,11 @@ repos:
         language: python
         types: [file, yaml]
   - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.19.0
+    rev: v1.20.0
     hooks:
       - id: terraform_docs
   - repo: git://github.com/prettier/prettier
-    rev: 1.18.2
+    rev: 1.19.1
     hooks:
       - id: prettier
         exclude_types: [markdown]
