@@ -1,8 +1,8 @@
 # tf-scaffold
 
 This repository exists to help with new terraform projects, and with automation and training.
-The repository is designed to create the structure- scaffold that is alway needed for a new project.
-
+The repository is designed to create the structure- scaffold that is alway needed for a new Terraform project.
+Included are the basic Github Actions.
 To clone scaffold repository but with no .git folder.
 
 ## Powershell
@@ -31,11 +31,13 @@ or
 function scaffold {
    param(
       [parameter(mandatory=$true)]
-      [string]$name)
+         [string]$name,
+         [string]$branch="master",
+         [switch]$repo=$false)
 
    if (!(test-path .\$name))
    {
-      git clone --depth=1 git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
+       git clone --depth=1 --branch=$branch git@github.com:JamesWoolfenden/tf-scaffold.git "$name"
    }
    else{
       write-warning "Path $name already exists"
@@ -44,9 +46,13 @@ function scaffold {
 
    rm "$name\.git" -recurse -force
    cd $name
+   echo "# %name" >README.md
+   if ($repo)
+   {
    git init|git add -A
    pre-commit install
    git commit -m "Initial Draft"
+   }
 }
 ```
 
@@ -54,6 +60,10 @@ Then you can use:
 
 ```powershell
 scaffold -name hello-world
+```
+or to start a new git repo as well:
+```powershell
+scaffold -name hello-world -repo
 ```
 
 To make a new project anytime you like.
@@ -157,5 +167,9 @@ Sets the repository to be automatically dependency scanned in github.
 If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Inputs
 
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| common\_tags | This is to help you add tags to your cloud objects | map | n/a | yes |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
