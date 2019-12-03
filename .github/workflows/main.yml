@@ -1,27 +1,29 @@
+---
 name: Verify and Bump
 on:
   push:
     branches:
       - master
 jobs:
-  validate:
-    name: validate
+  examples:
+    name: "Terraform (examples)"
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
-        uses: actions/checkout@v1
-
-      - name: Run a Terraform init
-        uses: docker://hashicorp/terraform:0.12.13
+      - name: "Checkout"
+        uses: actions/checkout@master
+      - name: "Terraform Init"
+        uses: hashicorp/terraform-github-actions@master
         with:
-          entrypoint: terraform
-          args: init
-
-      - name: Run a Terraform validate
-        uses: docker://hashicorp/terraform:0.12.13
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: "init"
+          tf_actions_working_dir: "example/examplea"
+      - name: "Terraform Validate"
+        uses: hashicorp/terraform-github-actions@master
         with:
-          entrypoint: terraform
-          args: validate
+          tf_actions_version: 0.12.13
+          tf_actions_subcommand: "validate"
+          tf_actions_working_dir: "example/examplea"
+
   build:
     name: versioning
     runs-on: ubuntu-latest
@@ -33,4 +35,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           WITH_V: "true"
-    needs: validate
+    needs: examples
