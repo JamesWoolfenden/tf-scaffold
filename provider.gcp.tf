@@ -1,3 +1,3 @@
 provider "google" {
-  version = "2.16"
+  version = "~> 2.20.1"
 }
