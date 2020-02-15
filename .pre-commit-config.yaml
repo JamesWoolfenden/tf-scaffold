@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v2.4.0
+    rev: v2.5.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -16,17 +16,12 @@ repos:
       - id: forbid-tabs
         exclude_types: [python, javascript, dtd, markdown, makefile, xml]
         exclude: binary|\.bin$
-  - repo: git://github.com/kintoandar/pre-commit
-    rev: v2.1.0
-    hooks:
-      - id: terraform_fmt
-
   - repo: git://github.com/detailyang/pre-commit-shell
     rev: 1.0.5
     hooks:
       - id: shell-lint
   - repo: git://github.com/igorshubovych/markdownlint-cli
-    rev: v0.21.0
+    rev: v0.22.0
     hooks:
       - id: markdownlint
   - repo: git://github.com/adrienverge/yamllint
@@ -47,8 +42,12 @@ repos:
     hooks:
       - id: prettier
         exclude_types: [markdown]
+  - repo: git://github.com/melmorabity/pre-commit-terraform-fmt
+    rev: 0.0.1
+    hooks:
+      - id: terraform-fmt
   - repo: git://github.com/bridgecrewio/checkov
-    rev: 1.0.167
+    rev: 1.0.173
     hooks:
       - id: checkov
         files: \.tf$
