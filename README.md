@@ -169,10 +169,18 @@ Sets the repository to be automatically dependency scanned in github.
 If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Providers
+
+No provider.
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|:----:|:-----:|:-----:|
-| common\_tags | This is to help you add tags to your cloud objects | map | n/a | yes |
+|------|-------------|------|---------|:-----:|
+| common\_tags | This is to help you add tags to your cloud objects | `map` | n/a | yes |
+
+## Outputs
+
+No output.
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
