@@ -18,3 +18,4 @@ lambda
 *~HEAD
 *backup
 *.bak
+.terraform.tfstate.lock.info
