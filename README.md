@@ -1,7 +1,10 @@
 # tf-scaffold
 
+[![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/tfscaffold.svg)](https://github.com/JamesWoolfenden/tfscaffold/releases/latest)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+
 This repository exists to help with new terraform projects, and with automation and training.
-The repository is designed to create the structure- scaffold that is alway needed for a new Terraform project.
+The repository is designed to create the structure- scaffold that is always needed for a new Terraform project.
 Included are the basic Github Actions.
 To clone scaffold repository but with no .git folder.
 
@@ -68,7 +71,7 @@ or to start a new git repo as well:
 scaffold -name hello-world -repo
 ```
 
-To make a new project anytime you like.
+To make a new project any-time you like.
 
 ## \*Nix
 
@@ -103,7 +106,7 @@ rm $name/.git -rf
 
 ## Usage
 
-Once it's in your profile, pretty straigh forward:
+Once it's in your profile, pretty straight forward:
 
 ```cli
  $ scaffold terraform-aws-generic
