@@ -18,7 +18,7 @@ repos:
       - id: detect-aws-credentials
       - id: detect-private-key
   - repo: git://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.1.7
+    rev: v1.1.9
     hooks:
       - id: forbid-tabs
         exclude_types:
@@ -38,7 +38,7 @@ repos:
     hooks:
       - id: markdownlint
   - repo: git://github.com/adrienverge/yamllint
-    rev: v1.23.0
+    rev: v1.24.2
     hooks:
       - id: yamllint
         name: yamllint
