@@ -1,5 +1,8 @@
 # tf-scaffold
 
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![checkov](https://img.shields.io/badge/checkov-verified-brightgreen)](https://www.checkov.io/)
+
 This repository exists to help with new terraform projects, and with automation and training.
 The repository is designed to create the structure- scaffold that is alway needed for a new Terraform project.
 Included are the basic Github Actions.
@@ -169,6 +172,10 @@ Sets the repository to be automatically dependency scanned in github.
 If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 No provider.
@@ -176,7 +183,7 @@ No provider.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | common\_tags | This is to help you add tags to your cloud objects | `map` | n/a | yes |
 
 ## Outputs
