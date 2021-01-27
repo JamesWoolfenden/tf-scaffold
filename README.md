@@ -128,7 +128,7 @@ Has good defaults for working with Terraform
 ### .pre-commit-config.yaml
 
 Has a standard set of pre-commit hooks for working with Terraform and AWS. You'll need to install the pre-commit framework <https://pre-commit.com/#install>.
-And after youve added all these file to your new repo, in the root of your new repository:
+And after you've added all these file to your new repo, in the root of your new repository:
 
 ```cli
 pre-commit install
