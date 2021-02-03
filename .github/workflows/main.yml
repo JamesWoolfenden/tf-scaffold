@@ -3,39 +3,31 @@ name: Verify and Bump
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8]
 
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: master
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
+          ref: main
+      - uses: hashicorp/setup-terraform@master
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: "Terraform Init"
-        uses: hashicorp/terraform-github-actions@master
+          terraform_version: 0.14.5
+      - name: Terraform Init
+        id: init
+        run: terraform init example/examplea
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate example/examplea
+      - name: Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
         with:
-          tf_actions_version: 0.14.0
-          tf_actions_subcommand: "init"
-          tf_actions_working_dir: "example/examplea"
-      - name: "Terraform Validate"
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.0
-          tf_actions_subcommand: "validate"
-          tf_actions_working_dir: "example/examplea"
-      - name: Test with Checkov
-        run: |
-          pip install checkov
-          checkov -d .
+          directory: "example/examplea"
+          framework: terraform
   version:
     name: versioning
     runs-on: ubuntu-latest
