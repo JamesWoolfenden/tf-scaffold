@@ -2,7 +2,7 @@
 *.tfstate
 *.tfstate.backup
 *.zip
-
+.DS_Store
 # Module directory
 .terraform/
 .terraform
@@ -21,3 +21,5 @@ lambda
 *backup
 *.bak
 .terraform.tfstate.lock.info
+.terraform.lock.hcl
+*.log

@@ -2,6 +2,7 @@
 
 [![Latest Release](https://img.shields.io/github/release/JamesWoolfenden/tfscaffold.svg)](https://github.com/JamesWoolfenden/tfscaffold/releases/latest)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![checkov](https://img.shields.io/badge/checkov-verified-brightgreen)](https://www.checkov.io/)
 
 This repository exists to help with new terraform projects, and with automation and training.
 The repository is designed to create the structure- scaffold that is always needed for a new Terraform project.
@@ -128,7 +129,7 @@ Has good defaults for working with Terraform
 ### .pre-commit-config.yaml
 
 Has a standard set of pre-commit hooks for working with Terraform and AWS. You'll need to install the pre-commit framework <https://pre-commit.com/#install>.
-And after youve added all these file to your new repo, in the root of your new repository:
+And after you've added all these file to your new repo, in the root of your new repository:
 
 ```cli
 pre-commit install
@@ -172,6 +173,10 @@ Sets the repository to be automatically dependency scanned in github.
 If you leave the section below in your **README.md** then the pre-commit will auto update your docs.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 No provider.
@@ -179,7 +184,7 @@ No provider.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:-----:|
+|------|-------------|------|---------|:--------:|
 | common\_tags | This is to help you add tags to your cloud objects | `map` | n/a | yes |
 
 ## Outputs
