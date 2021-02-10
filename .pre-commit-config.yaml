@@ -1,36 +1,37 @@
 ---
+# yamllint disable rule:line-length
+default_language_version:
+  python: python3.8
 repos:
   - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v2.4.0
+    rev: v3.4.0
     hooks:
+      - id: check-json
+      - id: check-merge-conflict
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
-      - id: check-merge-conflict
-      - id: detect-aws-credentials
+      - id: pretty-format-json
+        args:
+          - --autofix
       - id: detect-private-key
   - repo: git://github.com/Lucas-C/pre-commit-hooks
-    rev: v1.1.7
+    rev: v1.1.9
     hooks:
       - id: forbid-tabs
         exclude_types: [python, javascript, dtd, markdown, makefile, xml]
         exclude: binary|\.bin$
-  - repo: git://github.com/kintoandar/pre-commit
-    rev: v2.1.0
-    hooks:
-      - id: terraform_fmt
-
-  - repo: git://github.com/detailyang/pre-commit-shell
-    rev: 1.0.5
+  - repo: git://github.com/jameswoolfenden/pre-commit-shell
+    rev: 0.0.2
     hooks:
       - id: shell-lint
   - repo: git://github.com/igorshubovych/markdownlint-cli
-    rev: v0.21.0
+    rev: v0.26.0
     hooks:
       - id: markdownlint
   - repo: git://github.com/adrienverge/yamllint
-    rev: v1.20.0
+    rev: v1.26.0
     hooks:
       - id: yamllint
         name: yamllint
@@ -38,17 +39,16 @@ repos:
         entry: yamllint
         language: python
         types: [file, yaml]
-  - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.25.0
+  - repo: git://github.com/jameswoolfenden/pre-commit
+    rev: v0.1.33
     hooks:
-      - id: terraform_docs
-  - repo: git://github.com/prettier/prettier
-    rev: 1.19.1
-    hooks:
-      - id: prettier
-        exclude_types: [markdown]
+      - id: terraform-fmt
+        language_version: python3.8
+      - id: tf2docs
+        language_version: python3.8
   - repo: git://github.com/bridgecrewio/checkov
-    rev: 1.0.167
+    rev: 1.0.771
     hooks:
       - id: checkov
-        files: \.tf$
+        verbose: true
+        entry: checkov -d example/examplea
