@@ -1,16 +1,11 @@
 ---
 # yamllint disable rule:line-length
-name: Verify and Bump
-on:
-  schedule:
-    - cron: '00 7 * * SUN'
-  push:
-    branches:
-      - main
+name: pull_request
+on: pull_request
 env:
   terraform: 0.14.5
   tf_target_dir: example/examplea
-  branch: main
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -18,7 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ env.branch }}
           token: ${{ github.token }}
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
@@ -38,25 +32,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: ${{ env.branch }}
           token: ${{ github.token }}
 
       - name: Checkov action
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: ${{ env.tf_target_dir }}
+          directory: "example/examplea"
           framework: terraform
           args: "--output cli  --bc-api-key ${{ secrets.BC_API_KEY }}"
-  version:
-    name: versioning
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - name: Bump version and push tag
-        if: ${{ !env.ACT }}
-        uses: anothrNick/github-tag-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          WITH_V: "true"
-    needs: [terraform, security]

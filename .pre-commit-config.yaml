@@ -43,14 +43,14 @@ repos:
         language: python
         types: [file, yaml]
   - repo: git://github.com/jameswoolfenden/pre-commit
-    rev: v0.1.33
+    rev: v0.1.35
     hooks:
       - id: terraform-fmt
         language_version: python3.8
       - id: tf2docs
         language_version: python3.8
   - repo: git://github.com/bridgecrewio/checkov
-    rev: 1.0.771
+    rev: 1.0.775
     hooks:
       - id: checkov
         verbose: true
