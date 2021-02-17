@@ -5,7 +5,7 @@ on: pull_request
 env:
   terraform: 0.14.5
   tf_target_dir: example/examplea
-  branch: master
+
 jobs:
   terraform:
     runs-on: ubuntu-latest
