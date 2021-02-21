@@ -4,6 +4,7 @@ name: pull_request
 on: pull_request
 env:
   terraform: 0.14.5
+  terraform-docs: 0.11.1
   tf_target_dir: example/examplea
 
 jobs:
@@ -33,10 +34,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           token: ${{ github.token }}
-
-      - name: Checkov action
-        uses: bridgecrewio/checkov-action@master
+      - uses: actions/setup-python@v2
         with:
-          directory: "example/examplea"
-          framework: terraform
-          args: "--output cli  --bc-api-key ${{ secrets.BC_API_KEY }}"
+          python-version: 3.8
+      - run: |
+          mkdir $GITHUB_WORKSPACE/bin
+          curl -Lo $GITHUB_WORKSPACE/bin/terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v${{ env.terraform-docs }}/terraform-docs-v${{ env.terraform-docs }}-$(uname)-amd64
+          chmod +x $GITHUB_WORKSPACE/bin/terraform-docs
+          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+      - uses: pre-commit/action@v2.0.0

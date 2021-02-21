@@ -1,4 +1,4 @@
-#Makefile
+# Makefile
 ifdef OS
    BLAT = $(powershell  -noprofile rm .\.terraform\ -force -recurse)
    RM = $(powershell  -noprofile rm .\.terraform\ -force -recurse)
@@ -41,6 +41,7 @@ valid:
 	terraform fmt -recursive
 	checkov -d . --external-checks-dir ../../checkov
 	tfsec .
+	terrascan scan
 
 target:
 	@read -p "Enter Module to target:" MODULE;
