@@ -4,7 +4,8 @@
   "MD033": {
     "allowed_elements": [
       "br",
-      "pre"
+      "pre",
+      "a"
     ]
   },
   "MD034": false,
