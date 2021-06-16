@@ -6,14 +6,15 @@
 # Module directory
 .terraform/
 .terraform
+.plugins
 __pycache__/
+.vscode/
 .idea
 *.iml
 *.orig
 *.ini
 *~HEAD
 *backup
-*.ini
 tmp
 lambda
 *~HEAD
@@ -21,4 +22,11 @@ lambda
 *.bak
 .terraform.tfstate.lock.info
 .terraform.lock.hcl
+tf.json
+tf.plan
 *.log
+output/*.json
+secrets.auto.tfvars
+checksums.txt
+*.tar.gz
+original/
