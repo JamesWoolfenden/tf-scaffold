@@ -2,8 +2,6 @@
 # yamllint disable rule:line-length
 name: Verify and Bump
 on:
-  schedule:
-    - cron: "00 7 * * SUN"
   workflow_dispatch:
   push:
     branches:
@@ -21,6 +19,7 @@ jobs:
         with:
           ref: ${{ env.branch }}
           token: ${{ github.token }}
+          fetch-depth: '0'
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -63,6 +62,7 @@ jobs:
         with:
           ref: ${{ env.branch }}
           token: ${{ github.token }}
+          fetch-depth: '0'
       - uses: actions/setup-python@v2
         with:
           python-version: 3.8
@@ -78,9 +78,11 @@ jobs:
     name: versioning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@master
+        uses: anothrNick/github-tag-action@1.38.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
