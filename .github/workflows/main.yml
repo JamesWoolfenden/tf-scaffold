@@ -2,13 +2,12 @@
 # yamllint disable rule:line-length
 name: Verify and Bump
 on:
-  schedule:
-    - cron: '00 7 * * SUN'
+  workflow_dispatch:
   push:
     branches:
       - main
 env:
-  terraform: 0.14.5
+  terraform: 1.3.5
   tf_target_dir: example/examplea
   branch: main
 jobs:
@@ -16,10 +15,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.5.0
         with:
           ref: ${{ env.branch }}
           token: ${{ github.token }}
+          fetch-depth: '0'
+      - name: Config Terraform plugin cache
+        run: |
+          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+          mkdir --parents ~/.terraform.d/plugin-cache
+      - name: Cache Terraform
+        uses: actions/cache@v3.0.11
+        with:
+          path: |
+            ~/.terraform.d/plugin-cache
+          key: ${{ runner.os }}-terraform-${{ hashFiles('**/.terraform.lock.hcl') }}
+          restore-keys: |
+            ${{ runner.os }}-terraform-
       - name: Terraform Init
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -36,27 +48,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.5.0
         with:
           ref: ${{ env.branch }}
           token: ${{ github.token }}
-      - uses: actions/setup-python@v2
+          fetch-depth: '0'
+      - uses: actions/setup-python@v2.3.3
         with:
           python-version: 3.8
       - run: |
+          pip3 install lastversion
+          lastversion terraform-docs --assets -d --verbose
           mkdir $GITHUB_WORKSPACE/bin
-          curl -Lo $GITHUB_WORKSPACE/bin/terraform-docs https://github.com/terraform-docs/terraform-docs/releases/download/v0.10.1/terraform-docs-v0.10.1-$(uname)-amd64
+          tar -xvf terraform-docs*.tar.gz --directory $GITHUB_WORKSPACE/bin
           chmod +x $GITHUB_WORKSPACE/bin/terraform-docs
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
-      - uses: pre-commit/action@v2.0.0
+      - uses: pre-commit/action@v3.0.0
   version:
     name: versioning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2.5.0
+        with:
+          fetch-depth: '0'
       - name: Bump version and push tag
-        if: ${{ !env.ACT }}
-        uses: anothrNick/github-tag-action@master
+        uses: anothrNick/github-tag-action@1.53.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
