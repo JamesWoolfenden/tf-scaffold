@@ -42,7 +42,7 @@ jobs:
       - name: Terraform validate
         id: validate
         run: terraform validate
-        working-directory: ${{ env.tf_target_dir }}	
+        working-directory: ${{ env.tf_target_dir }}
       - name: Terraform plan
         id: plan
         run: terraform plan
