@@ -7,7 +7,7 @@ on:
     branches:
       - main
 env:
-  terraform: 0.15.0
+  terraform: 1.3.0
   tf_target_dir: example/examplea
   branch: main
 jobs:
@@ -15,14 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.3.0
         with:
           ref: ${{ env.branch }}
           token: ${{ github.token }}
           fetch-depth: '0'
       - name: Config Terraform plugin cache
         run: |
-          echo 'plugin_cache_dir="$HOME/.terraform.d/plugin-cache"' >~/.terraformrc
+          echo "plugin_cache_dir=$HOME/.terraform.d/plugin-cache" >~/.terraformrc
           mkdir --parents ~/.terraform.d/plugin-cache
       - name: Cache Terraform
         uses: actions/cache@v2
@@ -57,10 +57,10 @@ jobs:
         run: |
           pip3 install lastversion
           lastversion infracost --assets -d --verbose
-          mkdir $GITHUB_WORKSPACE/bin
-          tar -xvf infracost*.tar.gz --directory $GITHUB_WORKSPACE/bin
-          chmod +x $GITHUB_WORKSPACE/bin/infracost-linux-amd64
-          $GITHUB_WORKSPACE/bin/infracost-linux-amd64 breakdown --path ${{ env.tf_target_dir }} --usage-file ${{ env.tf_target_dir }}/infracost-usage.yml
+          mkdir "$GITHUB_WORKSPACE/bin"
+          tar -xvf infracost*.tar.gz --directory "$GITHUB_WORKSPACE/bin"
+          chmod +x "$GITHUB_WORKSPACE/bin/infracost-linux-amd64"
+          "$GITHUB_WORKSPACE/bin/infracost-linux-amd64 breakdown" --path ${{ env.tf_target_dir }} --usage-file ${{ env.tf_target_dir }}/infracost-usage.yml
         env:
           INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Do not change
@@ -70,31 +70,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.3.0
         with:
           ref: ${{ env.branch }}
           token: ${{ github.token }}
           fetch-depth: '0'
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4.5.0
         with:
           python-version: 3.8
       - run: |
           pip3 install lastversion
           lastversion terraform-docs --assets -d --verbose
-          mkdir $GITHUB_WORKSPACE/bin
-          tar -xvf terraform-docs*.tar.gz --directory $GITHUB_WORKSPACE/bin
-          chmod +x $GITHUB_WORKSPACE/bin/terraform-docs
-          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
-      - uses: pre-commit/action@v2.0.0
+          mkdir "$GITHUB_WORKSPACE/bin"
+          tar -xvf terraform-docs*.tar.gz --directory "$GITHUB_WORKSPACE/bin"
+          chmod +x "$GITHUB_WORKSPACE/bin/terraform-docs"
+          echo "$GITHUB_WORKSPACE/bin" >> "$GITHUB_PATH"
+      - uses: pre-commit/action@v3.0.0
   version:
     name: versioning
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3.3.0
         with:
           fetch-depth: '0'
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.38.0
+        uses: anothrNick/github-tag-action@1.61.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch

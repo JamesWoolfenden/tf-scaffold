@@ -4,7 +4,7 @@
 [![checkov](https://img.shields.io/badge/checkov-verified-brightgreen)](https://www.checkov.io/)
 
 This repository exists to help with new terraform projects, and with automation and training.
-The repository is designed to create the structure- scaffold that is alway needed for a new Terraform project.
+The repository is designed to create the structure- scaffold that is always needed for a new Terraform project.
 Included are the basic Github Actions.
 To clone scaffold repository but with no .git folder.
 
