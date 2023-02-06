@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  terraform: 0.15.0
+  terraform: 1.3.0
   tf_target_dir: example/examplea
 
 jobs:
