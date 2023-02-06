@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.5.0
+        uses: actions/checkout@v3.3.0
         with:
           token: ${{ github.token }}
           fetch-depth: '0'
@@ -29,23 +29,26 @@ jobs:
         with:
           tf_actions_version: ${{ env.terraform }}
           tf_actions_subcommand: validate
-          tf_actions_working_dir: ${{ env.tf_target_dir }}
+          tf_actions_working_dir: example/examplea
   security:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.5.0
+        uses: actions/checkout@v3.3.0
         with:
           token: ${{ github.token }}
           fetch-depth: '0'
-      - uses: actions/setup-python@v2.3.3
+      - uses: actions/setup-python@v4.5.0
         with:
           python-version: 3.8
       - run: |
           pip3 install lastversion
           lastversion terraform-docs --assets -d --verbose
-          mkdir $GITHUB_WORKSPACE/bin
-          tar -xvf terraform-docs*.tar.gz --directory $GITHUB_WORKSPACE/bin
-          chmod +x $GITHUB_WORKSPACE/bin/terraform-docs
-          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+          mkdir "$GITHUB_WORKSPACE/bin"
+          tar -xvf terraform-docs*.tar.gz --directory "$GITHUB_WORKSPACE/bin"
+          chmod +x "$GITHUB_WORKSPACE/bin/terraform-docs"
+          wget https://github.com/rhysd/actionlint/releases/download/v1.6.23/actionlint_1.6.23_linux_amd64.tar.gz
+          tar -xvf actionlint_1.6.23_linux_amd64.tar.gz --directory "$GITHUB_WORKSPACE/bin"
+          chmod +x "$GITHUB_WORKSPACE/bin/actionlint"
+          echo "$GITHUB_WORKSPACE/bin" >> "$GITHUB_PATH"
       - uses: pre-commit/action@v3.0.0
