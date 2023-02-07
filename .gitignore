@@ -4,10 +4,11 @@
 *.zip
 .DS_Store
 # Module directory
-.pytest_cache/
 .terraform/
 .terraform
+.plugins
 __pycache__/
+.vscode/
 .idea
 *.iml
 *.orig
@@ -26,3 +27,8 @@ tf.plan
 *.log
 output/*.json
 secrets.auto.tfvars
+checksums.txt
+*.tar.gz
+original/
+.external_modules
+twistcli
