@@ -74,6 +74,7 @@ jobs:
           echo "$GITHUB_WORKSPACE/bin" >> "$GITHUB_PATH"
       - uses: pre-commit/action@v3.0.0
   version:
+    permissions: write-all
     name: versioning
     runs-on: ubuntu-latest
     steps:

@@ -100,7 +100,7 @@ fi
 
 echo "git clone --depth=1 --branch $branch git@github.com:JamesWoolfenden/tf-scaffold.git $name"
 git clone --depth=1 --branch $branch git@github.com:JamesWoolfenden/tf-scaffold.git $name
-rm $name/.git -rf
+rm -rf $name/.git
 }
 ```
 
